@@ -27,7 +27,8 @@ THIRD_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "django_filters",
-    "import_export"
+    "import_export",
+    "grappelli",
 ]
 
 LOCAL_APPS = [
@@ -37,7 +38,7 @@ LOCAL_APPS = [
     "apps.user"
 ]
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_APPS + LOCAL_APPS
+INSTALLED_APPS = THIRD_APPS + DJANGO_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -124,6 +125,7 @@ USE_TZ = True
 USE_L10N = True
 
 STATIC_URL = 'static/'
+STATIC_ROOT = 'static/'
 
 LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 

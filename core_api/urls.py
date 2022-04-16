@@ -7,6 +7,7 @@ admin.site.index_title = "Dafiti"
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("grappelli/", include("grappelli.urls")),
     path("api/v1/", include("apps.user.urls")),
     path("api/v1/", include("apps.product.urls")),
     path("api/v1/", include("apps.category.urls")),
