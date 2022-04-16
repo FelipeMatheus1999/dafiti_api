@@ -4,7 +4,7 @@ from apps.user.exceptions import UserPermissionException
 
 
 class UserPermissions(BasePermission):
-    protected_methods = ("GET", "PATCH", "PUT", "DELETE")
+    protected_methods = ("POST", "GET", "PATCH", "PUT", "DELETE")
 
     @staticmethod
     def is_retrieve(request):
@@ -22,6 +22,20 @@ class UserPermissions(BasePermission):
 
         return int(user_id)
 
+    @staticmethod
+    def is_authenticated_but_not_allowed_to_create(request):
+        method = request.method
+        user = request.user
+        is_superuser = user.is_superuser
+        is_authenticated = user.is_authenticated
+        is_post = method == "POST"
+
+        if (
+                is_authenticated and
+                not is_superuser and
+                is_post
+        ):
+            raise UserPermissionException
     def is_authenticated_and_method_in_protect_methods(self, request):
         method = request.method
         user = request.user
@@ -61,6 +75,7 @@ class UserPermissions(BasePermission):
 
     def has_permission(self, request, _):
         try:
+            self.is_authenticated_but_not_allowed_to_create(request)
             self.is_authenticated_and_method_in_protect_methods(request)
             self.is_superuser_to_all_get(request)
             self.is_self_retrieve(request)
