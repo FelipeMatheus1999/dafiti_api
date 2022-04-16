@@ -100,7 +100,7 @@ docker-compose up
 
 ### Login
 
->
+----
 
 **Endpoint: `login/`**
 
@@ -136,11 +136,11 @@ Response Example:
 
 > Note: This token expires every 1 hour. But don't worry, it only expires after an hour if you log in. We don't want your session to fall in the middle of an important task =)
 
->
+----
 
 ### User
 
->
+----
 
 **Endpoint: `user/`**
 
@@ -195,7 +195,7 @@ Response Example:
 }
 ```
 
->
+----
 
 **Endpoint: `user/<int:user_id>/`**
 
@@ -223,7 +223,7 @@ Response Example:
 
 > Note: If you are not a superuser, you can only **get retrieve**, and only on yourself.
 
->
+----
 
 **Endpoint: `user/`**
 
@@ -259,7 +259,7 @@ Response example:
 }
 ```
 
-> 
+----
 
 **Endpoint: `user/<int:user_id>/`**
 
@@ -290,7 +290,7 @@ Body:
 
 > Note: If you are not a superuser, you can only **patch yourself**.
  
->
+----
 
 **Endpoint: `user/<int:user_id>/`**
 
@@ -306,7 +306,7 @@ Response Example: `No Content`
 
 > Note: If you are not a superuser, you can only **delete yourself**.
 
->
+----
 
 ### Product
 
@@ -364,7 +364,7 @@ Response Example:
 }
 ```
 
->
+----
  
 **Endpoint: `product/<int:product_id>/`**
 
@@ -397,7 +397,7 @@ Response Example:
 }
 ```
 
->
+----
 
 **Endpoint: `product/`**
 
@@ -452,7 +452,7 @@ Response Example:
 }
 ```
 
->
+----
 
 **Endpoint: `product/<int:product_id>/`**
 
@@ -496,7 +496,7 @@ Response Example:
 }
 ```
 
->
+----
 
 **Endpoint: `product/<int:product_id>/`**
 
@@ -524,7 +524,7 @@ Body: `No Body`
 
 Response Example: `ProductsModel.csv`
 
->
+----
 
 **Endpoint: `product/import/csv/`**
 
@@ -542,7 +542,7 @@ Body:
 ```
 
 | Product ID                | Title    | Description | Image    | Price           | Stock         | Categories                                                           | Date Joined           | Date Modified         | Is Active              |
-|---------------------------|----------|-------------|----------|-----------------|---------------|----------------------------------------------------------------------|-----------------------|-----------------------|------------------------|
+|---------------------------|----------|-------------|----------|-----------------|---------------|----------------------------------|-----------------------|-----------------------|------------------------|
 | Leave blank to create     | Required | Required    | Optional | Required(float) | Required(int) | Optional(Many to Many Field. Separator: " \ ", example: "6 \ 1 \ 4") | Optional(default=now) | Optional(default=now) | Optional(default=True) |
 
 > Note: You can import and export files from the admin panel as well.
@@ -556,11 +556,11 @@ Response Example:
 }
 ```
 
->
+----
 
 ### Category
 
->
+----
  
 **Endpoint: `category/`**
 
@@ -598,7 +598,7 @@ Response Example:
 }
 ```
 
->
+----
 
 **Endpoint: `category/<int:category_id>/`**
 
@@ -619,7 +619,7 @@ Response Example:
 }
 ```
 
->
+----
  
 **Endpoint: `category/`**
 
@@ -645,7 +645,7 @@ Response Example:
 }
 ```
 
->
+----
  
 **Endpoint: `category/<int:category_id>/`**
 
@@ -672,7 +672,7 @@ Response Example:
 
 > Note: You cannot edit a category for a category name that already exists.
 
->
+----
 
 **Endpoint: `category/<int:category_id>/`**
 
