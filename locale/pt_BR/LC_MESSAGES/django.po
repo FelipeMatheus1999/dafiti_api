@@ -1,0 +1,123 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-16 02:24+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: apps/category/admin.py:11 apps/product/admin.py:11 apps/user/admin.py:12
+msgid "Identification"
+msgstr "Identificação"
+
+#: apps/category/admin.py:19 apps/product/admin.py:38 apps/user/admin.py:30
+msgid "Administration"
+msgstr "Administração"
+
+#: apps/category/models.py:7
+msgid "Category Name"
+msgstr "Nome da Categoria"
+
+#: apps/category/models.py:14
+msgid "Category"
+msgstr "Categoria"
+
+#: apps/category/models.py:15
+msgid "Categories"
+msgstr "Categorias"
+
+#: apps/product/admin.py:22
+msgid "Pricing"
+msgstr "Precificação"
+
+#: apps/product/admin.py:30
+msgid "Stock Control"
+msgstr "Controle de Estoque"
+
+#: apps/product/models.py:17
+msgid "Product Title"
+msgstr "Título do Produto"
+
+#: apps/product/models.py:18
+msgid "Product Description"
+msgstr "Descrição do Produto"
+
+#: apps/product/models.py:19
+msgid "Product Image"
+msgstr "Imagem do Produto"
+
+#: apps/product/models.py:20
+msgid "Product Price"
+msgstr "Preço do Produto"
+
+#: apps/product/models.py:21
+msgid "Product Stock"
+msgstr "Estoque do Produto"
+
+#: apps/product/models.py:23
+msgid "Product Categories"
+msgstr "Categorias do Produto"
+
+#: apps/product/models.py:30
+msgid "Product"
+msgstr "Produto"
+
+#: apps/product/models.py:31
+msgid "Products"
+msgstr "Produtos"
+
+#: apps/user/admin.py:21
+msgid "Credentials"
+msgstr "Credenciais"
+
+#: apps/user/models.py:20
+msgid "User Email"
+msgstr "Email do Usuário"
+
+#: apps/user/models.py:21
+msgid "User Name"
+msgstr "Nome do Usuário"
+
+#: apps/user/models.py:22
+msgid "User Document"
+msgstr "CPF do Usuário"
+
+#: apps/user/models.py:22
+msgid "Just numbers"
+msgstr "Apenas números"
+
+#: apps/user/models.py:31
+msgid "User"
+msgstr "Usuário"
+
+#: apps/user/models.py:32
+msgid "Users"
+msgstr "Usuários"
+
+#: core_api/settings.py:108
+msgid "Portuguese"
+msgstr "Português"
+
+#: services/base_model/__init__.py:6
+msgid "Date Joined"
+msgstr "Data de Inserção"
+
+#: services/base_model/__init__.py:7
+msgid "Date Modified"
+msgstr "Data de Modificação"
+
+#: services/cpf/__init__.py:66
+msgid "Invalid Document."
+msgstr "Documento Inválido."
