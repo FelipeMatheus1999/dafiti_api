@@ -79,7 +79,21 @@ docker-compose run web bash -c "coverage run ./manage.py test -v 3 && coverage r
 without `make` command.
 
 > All `make` commands are in the `Makefile`. I strongly recommend using it to your advantage in development.
- 
+
+## Run
+
+To launch the application with the `make` command, just run the following command:
+
+```commandline
+make run
+```
+
+Without the `make` command:
+
+```commandline
+docker-compose up
+```
+
 ## API
 
 `base_url` = http://localhost:8000/api/v1/
