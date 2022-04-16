@@ -63,7 +63,7 @@ class TestUserIntegration(APITestCase):
             }
         }
 
-        response = self.api_client.post(**payload)
+        response = self.api_logged_superuser.post(**payload)
 
         assert response.status_code == status.HTTP_400_BAD_REQUEST
 
@@ -78,11 +78,11 @@ class TestUserIntegration(APITestCase):
             }
         }
 
-        response = self.api_client.post(**payload)
+        response = self.api_logged_superuser.post(**payload)
 
         assert response.status_code == status.HTTP_400_BAD_REQUEST
 
-    def test_can_create_user(self):
+    def test_cant_create_user_unauthenticated(self):
         payload = {
             "path": self.endpoints["user"],
             "data": {
@@ -94,6 +94,36 @@ class TestUserIntegration(APITestCase):
         }
 
         response = self.api_client.post(**payload)
+
+        assert response.status_code == status.HTTP_401_UNAUTHORIZED
+
+    def test_base_user_cant_create_user_authenticated(self):
+        payload = {
+            "path": self.endpoints["user"],
+            "data": {
+                "name": fake.name(),
+                "document": cpf.force_valid_cpf(),
+                "email": fake.email(),
+                "password": "test"
+            }
+        }
+
+        response = self.api_logged_user.post(**payload)
+
+        assert response.status_code == status.HTTP_403_FORBIDDEN
+
+    def test_can_create_user_authenticated(self):
+        payload = {
+            "path": self.endpoints["user"],
+            "data": {
+                "name": fake.name(),
+                "document": cpf.force_valid_cpf(),
+                "email": fake.email(),
+                "password": "test"
+            }
+        }
+
+        response = self.api_logged_superuser.post(**payload)
 
         has_token_in_body = "token" in response.data
 
