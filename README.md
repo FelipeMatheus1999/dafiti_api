@@ -40,8 +40,8 @@ This command will make all the necessary configurations to manually upload and t
 
 ```json
 {
-  "email": "dafiti@dafiti.com",
-  "password": "dafiti"
+  "email": "base@tester.com",
+  "password": "base"
 }
 ```
 

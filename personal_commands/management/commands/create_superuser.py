@@ -7,11 +7,11 @@ from services.cpf import CPFLogics
 class Command(BaseCommand):
     def handle(self, *_, **options):
         cpf = CPFLogics()
-        email = "dafiti@dafiti.com"
-        password = make_password("dafiti")
+        email = "base@tester.com"
+        password = make_password("base")
 
         fields = {
-            "name": "Dafiti Superuser",
+            "name": "Base Superuser",
             "email": email,
             "password": password,
             "document": cpf.force_valid_cpf(),
@@ -24,5 +24,5 @@ class Command(BaseCommand):
             UserModel.objects.create(**fields)
 
         self.stdout.write(
-            f"\n User credentials: \n email: {email} \n password: dafiti \n"
+            f"\n User credentials: \n email: {email} \n password: base \n"
         )
