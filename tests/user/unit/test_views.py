@@ -16,7 +16,10 @@ class TestUserViewSet(TestCase):
         assert issubclass(UserViewSet, ModelViewSet)
 
     def test_attributes(self):
-        self.assertEquals(str(UserViewSet.queryset), str(UserModel.objects.order_by("id").filter(is_active=True)))
+        self.assertEquals(
+            str(UserViewSet.queryset),
+            str(UserModel.objects.order_by("id").filter(is_active=True)),
+        )
         self.assertEquals(UserViewSet.serializer_class, UserSerializer)
         self.assertEquals(UserViewSet.authentication_classes, [TokenAuthentication])
         self.assertEquals(UserViewSet.permission_classes, [UserPermissions])

@@ -1,24 +1,29 @@
 from import_export import resources, fields
-from import_export.widgets import DateTimeWidget, CharWidget, ManyToManyWidget, FloatWidget, IntegerWidget, BooleanWidget
+from import_export.widgets import (
+    DateTimeWidget,
+    CharWidget,
+    ManyToManyWidget,
+    FloatWidget,
+    IntegerWidget,
+    BooleanWidget,
+)
 from .models import ProductModel
 from ..category.models import CategoryModel
 
 
 class ProductResource(resources.ModelResource):
     id = fields.Field(attribute="id", column_name="Product ID", widget=CharWidget())
-    title = fields.Field(
-        attribute="title", column_name="Title", widget=CharWidget()
-    )
+    title = fields.Field(attribute="title", column_name="Title", widget=CharWidget())
     description = fields.Field(
         attribute="description", column_name="Description", widget=CharWidget()
     )
-    image = fields.Field(
-        attribute="image", column_name="Image", widget=CharWidget()
-    )
+    image = fields.Field(attribute="image", column_name="Image", widget=CharWidget())
     price = fields.Field(attribute="price", column_name="Price", widget=FloatWidget())
     stock = fields.Field(attribute="stock", column_name="Stock", widget=IntegerWidget())
     categories = fields.Field(
-        attribute="categories", column_name="Categories", widget=ManyToManyWidget(separator=" | ", model=CategoryModel)
+        attribute="categories",
+        column_name="Categories",
+        widget=ManyToManyWidget(separator=" | ", model=CategoryModel),
     )
     date_joined = fields.Field(
         attribute="date_joined", column_name="Date Joined", widget=DateTimeWidget()

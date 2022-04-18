@@ -15,7 +15,10 @@ class TestCategoryViewSet(TestCase):
         assert issubclass(CategoryViewSet, ModelViewSet)
 
     def test_attributes(self):
-        self.assertEquals(str(CategoryViewSet.queryset), str(CategoryModel.objects.order_by("id").filter(is_active=True)))
+        self.assertEquals(
+            str(CategoryViewSet.queryset),
+            str(CategoryModel.objects.order_by("id").filter(is_active=True)),
+        )
         self.assertEquals(CategoryViewSet.serializer_class, CategorySerializer)
         self.assertEquals(CategoryViewSet.authentication_classes, [TokenAuthentication])
         self.assertEquals(CategoryViewSet.permission_classes, [CategoryPermissions])

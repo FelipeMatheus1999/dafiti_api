@@ -7,23 +7,41 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='CategoryModel',
+            name="CategoryModel",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date_joined', models.DateTimeField(auto_now_add=True, verbose_name='Date Joined')),
-                ('date_modified', models.DateTimeField(auto_now_add=True, verbose_name='Date Modified')),
-                ('is_active', models.BooleanField(default=True)),
-                ('name', models.CharField(max_length=255, verbose_name='Category Name')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "date_joined",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Date Joined"),
+                ),
+                (
+                    "date_modified",
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="Date Modified"
+                    ),
+                ),
+                ("is_active", models.BooleanField(default=True)),
+                (
+                    "name",
+                    models.CharField(max_length=255, verbose_name="Category Name"),
+                ),
             ],
             options={
-                'verbose_name': 'Category',
-                'verbose_name_plural': 'Categories',
-                'db_table': 'category',
+                "verbose_name": "Category",
+                "verbose_name_plural": "Categories",
+                "db_table": "category",
             },
         ),
     ]

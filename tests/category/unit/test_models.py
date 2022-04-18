@@ -13,9 +13,7 @@ fake = Faker()
 class TestCategoryModel(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.category = CategoryModel.objects.create(
-            name=fake.name()
-        )
+        cls.category = CategoryModel.objects.create(name=fake.name())
 
     @staticmethod
     def test_category_is_base_model_instance():

@@ -12,14 +12,7 @@ class ProductsAdmin(ImportExportModelAdmin):
     fieldsets = [
         [
             _("Identification"),
-            {
-                "fields": [
-                    "title",
-                    "description",
-                    "image",
-                    "categories"
-                ]
-            }
+            {"fields": ["title", "description", "image", "categories"]},
         ],
         [
             _("Pricing"),
@@ -39,14 +32,8 @@ class ProductsAdmin(ImportExportModelAdmin):
         ],
         [
             _("Administration"),
-            {
-                "fields": [
-                    "date_joined",
-                    "date_modified",
-                    "is_active"
-                ]
-            }
-        ]
+            {"fields": ["date_joined", "date_modified", "is_active"]},
+        ],
     ]
     readonly_fields = ["date_joined", "date_modified"]
     list_display = ["__str__", "price", "stock"]

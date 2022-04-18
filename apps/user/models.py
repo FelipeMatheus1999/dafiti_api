@@ -4,6 +4,7 @@ from django.db import models
 from .managers import UserManager
 from services.cpf import CPFLogics
 from django.utils.translation import gettext_lazy as _
+
 cpf = CPFLogics()
 
 
@@ -19,7 +20,12 @@ class UserModel(AbstractUser):
 
     email = models.EmailField(max_length=100, unique=True, verbose_name=_("User Email"))
     name = models.CharField(max_length=100, verbose_name=_("User Name"))
-    document = models.CharField(max_length=11, validators=[cpf.validate_cpf], verbose_name=_("User Document"), help_text=_("Just numbers"))
+    document = models.CharField(
+        max_length=11,
+        validators=[cpf.validate_cpf],
+        verbose_name=_("User Document"),
+        help_text=_("Just numbers"),
+    )
 
     objects = UserManager()
 

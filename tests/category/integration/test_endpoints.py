@@ -29,52 +29,41 @@ class TestProductIntegration(APITestCase):
             document="90078144191",
         )
 
-        cls.base_category = CategoryModel.objects.create(
-            name=fake.name()
-        )
+        cls.base_category = CategoryModel.objects.create(name=fake.name())
 
         cls.api_logged_user = APIClient()
-        cls.base_user_credentials = cls.api_logged_user.credentials(HTTP_AUTHORIZATION=f"Token {Token.objects.get_or_create(user=cls.base_user)[0].key}")
+        cls.base_user_credentials = cls.api_logged_user.credentials(
+            HTTP_AUTHORIZATION=f"Token {Token.objects.get_or_create(user=cls.base_user)[0].key}"
+        )
 
         cls.endpoints = {
             "category": "/api/v1/category/",
-            "retrieve_category": "/api/v1/category/{}/"
+            "retrieve_category": "/api/v1/category/{}/",
         }
 
     def test_cant_get_category_unauthenticated(self):
-        payload = {
-            "path": self.endpoints["category"]
-        }
+        payload = {"path": self.endpoints["category"]}
 
         response = self.api_client.get(**payload)
 
         self.assertEquals(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_can_get_category_authenticated(self):
-        payload = {
-            "path": self.endpoints["category"]
-        }
+        payload = {"path": self.endpoints["category"]}
 
         response = self.api_logged_user.get(**payload)
 
         self.assertEquals(response.status_code, status.HTTP_200_OK)
 
     def test_cant_create_category_unauthenticated(self):
-        payload = {
-            "path": self.endpoints["category"]
-        }
+        payload = {"path": self.endpoints["category"]}
 
         response = self.api_client.post(**payload)
 
         self.assertEquals(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_can_create_category_authenticated(self):
-        payload = {
-            "path": self.endpoints["category"],
-            "data": {
-                "name": "Test"
-            }
-        }
+        payload = {"path": self.endpoints["category"], "data": {"name": "Test"}}
 
         response = self.api_logged_user.post(**payload)
 
@@ -83,9 +72,7 @@ class TestProductIntegration(APITestCase):
     def test_cant_update_category_unauthenticated(self):
         payload = {
             "path": self.endpoints["retrieve_category"].format("1"),
-            "data": {
-                "name": "Test"
-            }
+            "data": {"name": "Test"},
         }
 
         response = self.api_client.patch(**payload)
@@ -93,15 +80,11 @@ class TestProductIntegration(APITestCase):
         self.assertEquals(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_cant_update_category_authenticated_with_existent_name(self):
-        CategoryModel.objects.create(
-            name="TestRepeat"
-        )
+        CategoryModel.objects.create(name="TestRepeat")
 
         payload = {
             "path": self.endpoints["retrieve_category"].format(self.base_category.id),
-            "data": {
-                "name": "TestRepeat"
-            }
+            "data": {"name": "TestRepeat"},
         }
 
         response = self.api_logged_user.patch(**payload)
@@ -111,9 +94,7 @@ class TestProductIntegration(APITestCase):
     def test_can_update_category_authenticated(self):
         payload = {
             "path": self.endpoints["retrieve_category"].format(self.base_category.id),
-            "data": {
-                "name": "Test Can Update"
-            }
+            "data": {"name": "Test Can Update"},
         }
 
         response = self.api_logged_user.patch(**payload)

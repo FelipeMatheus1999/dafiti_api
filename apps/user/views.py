@@ -88,4 +88,6 @@ class UserLoginViewSet(ViewSet):
 
             return Response(data)
         else:
-            return Response({"detail": _("Not found.")}, status=status.HTTP_404_NOT_FOUND)
+            return Response(
+                {"detail": _("Not found.")}, status=status.HTTP_404_NOT_FOUND
+            )

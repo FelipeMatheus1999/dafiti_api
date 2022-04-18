@@ -16,11 +16,18 @@ def product_directory_path(instance, filename):
 class ProductModel(BaseModel):
     title = models.CharField(max_length=255, verbose_name=_("Product Title"))
     description = models.TextField(verbose_name=_("Product Description"))
-    image = models.FileField(upload_to=product_directory_path, null=True, blank=True, verbose_name=_("Product Image"))
+    image = models.FileField(
+        upload_to=product_directory_path,
+        null=True,
+        blank=True,
+        verbose_name=_("Product Image"),
+    )
     price = models.FloatField(verbose_name=_("Product Price"))
     stock = models.IntegerField(verbose_name=_("Product Stock"))
 
-    categories = models.ManyToManyField(CategoryModel, verbose_name=_("Product Categories"))
+    categories = models.ManyToManyField(
+        CategoryModel, verbose_name=_("Product Categories")
+    )
 
     def __str__(self):
         return self.title

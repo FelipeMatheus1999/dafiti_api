@@ -17,7 +17,7 @@ class Command(BaseCommand):
                 "password": make_password(fake.last_name()),
                 "document": cpf.force_valid_cpf(),
                 "is_staff": False,
-                "is_superuser": False
+                "is_superuser": False,
             }
             UserModel.objects.get_or_create(**fields)
         self.stdout.write(f"100 random users was created")

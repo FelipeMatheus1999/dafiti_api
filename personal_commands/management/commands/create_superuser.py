@@ -16,11 +16,13 @@ class Command(BaseCommand):
             "password": password,
             "document": cpf.force_valid_cpf(),
             "is_staff": True,
-            "is_superuser": True
+            "is_superuser": True,
         }
         try:
             UserModel.objects.get(email=email)
         except UserModel.DoesNotExist:
             UserModel.objects.create(**fields)
 
-        self.stdout.write(f"\n User credentials: \n email: {email} \n password: dafiti \n")
+        self.stdout.write(
+            f"\n User credentials: \n email: {email} \n password: dafiti \n"
+        )

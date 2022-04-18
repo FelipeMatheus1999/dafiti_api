@@ -41,15 +41,19 @@ class TestUserIntegration(APITestCase):
         )
 
         cls.api_logged_user = APIClient()
-        cls.base_user_credentials = cls.api_logged_user.credentials(HTTP_AUTHORIZATION=f"Token {Token.objects.get_or_create(user=cls.base_user)[0].key}")
+        cls.base_user_credentials = cls.api_logged_user.credentials(
+            HTTP_AUTHORIZATION=f"Token {Token.objects.get_or_create(user=cls.base_user)[0].key}"
+        )
 
         cls.api_logged_superuser = APIClient()
-        cls.base_user_credentials = cls.api_logged_superuser.credentials(HTTP_AUTHORIZATION=f"Token {Token.objects.get_or_create(user=cls.base_superuser)[0].key}")
+        cls.base_user_credentials = cls.api_logged_superuser.credentials(
+            HTTP_AUTHORIZATION=f"Token {Token.objects.get_or_create(user=cls.base_superuser)[0].key}"
+        )
 
         cls.endpoints = {
             "user": "/api/v1/user/",
             "retrieve_user": "/api/v1/user/{}/",
-            "login": "/api/v1/login/"
+            "login": "/api/v1/login/",
         }
 
     def test_cant_create_user_with_invalid_email(self):
@@ -59,8 +63,8 @@ class TestUserIntegration(APITestCase):
                 "name": fake.name(),
                 "document": cpf.force_valid_cpf(),
                 "email": "test_invalid_email",
-                "password": "test"
-            }
+                "password": "test",
+            },
         }
 
         response = self.api_logged_superuser.post(**payload)
@@ -74,8 +78,8 @@ class TestUserIntegration(APITestCase):
                 "name": fake.name(),
                 "document": "12345678911",
                 "email": fake.email(),
-                "password": "test"
-            }
+                "password": "test",
+            },
         }
 
         response = self.api_logged_superuser.post(**payload)
@@ -89,8 +93,8 @@ class TestUserIntegration(APITestCase):
                 "name": fake.name(),
                 "document": cpf.force_valid_cpf(),
                 "email": fake.email(),
-                "password": "test"
-            }
+                "password": "test",
+            },
         }
 
         response = self.api_client.post(**payload)
@@ -104,8 +108,8 @@ class TestUserIntegration(APITestCase):
                 "name": fake.name(),
                 "document": cpf.force_valid_cpf(),
                 "email": fake.email(),
-                "password": "test"
-            }
+                "password": "test",
+            },
         }
 
         response = self.api_logged_user.post(**payload)
@@ -119,8 +123,8 @@ class TestUserIntegration(APITestCase):
                 "name": fake.name(),
                 "document": cpf.force_valid_cpf(),
                 "email": fake.email(),
-                "password": "test"
-            }
+                "password": "test",
+            },
         }
 
         response = self.api_logged_superuser.post(**payload)
@@ -133,10 +137,7 @@ class TestUserIntegration(APITestCase):
     def test_cant_login_with_invalid_password(self):
         payload = {
             "path": self.endpoints["login"],
-            "data": {
-                "email": "superuser@email.test",
-                "password": "invalid_password"
-            }
+            "data": {"email": "superuser@email.test", "password": "invalid_password"},
         }
 
         response = self.api_client.post(**payload)
@@ -146,10 +147,7 @@ class TestUserIntegration(APITestCase):
     def test_cant_login_with_invalid_email(self):
         payload = {
             "path": self.endpoints["login"],
-            "data": {
-                "email": "invalid@email.test",
-                "password": "superuser"
-            }
+            "data": {"email": "invalid@email.test", "password": "superuser"},
         }
 
         response = self.api_client.post(**payload)
@@ -159,10 +157,7 @@ class TestUserIntegration(APITestCase):
     def test_can_login(self):
         payload = {
             "path": self.endpoints["login"],
-            "data": {
-                "email": "superuser@email.test",
-                "password": "superuser"
-            }
+            "data": {"email": "superuser@email.test", "password": "superuser"},
         }
 
         response = self.api_client.post(**payload)
@@ -173,26 +168,20 @@ class TestUserIntegration(APITestCase):
         assert has_token_in_body
 
     def test_cant_all_get_unauthenticated(self):
-        payload = {
-            "path": self.endpoints["user"]
-        }
+        payload = {"path": self.endpoints["user"]}
 
         response = self.api_client.get(**payload)
 
         assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
     def test_cant_retrieve_get_unauthenticated(self):
-        payload = {
-            "path": self.endpoints["retrieve_user"].format("1")
-        }
+        payload = {"path": self.endpoints["retrieve_user"].format("1")}
         response = self.api_client.get(**payload)
 
         assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
     def test_base_user_can_retrieve_yourself(self):
-        payload = {
-            "path": self.endpoints["retrieve_user"].format(self.base_user.id)
-        }
+        payload = {"path": self.endpoints["retrieve_user"].format(self.base_user.id)}
         response = self.api_logged_user.get(**payload)
 
         assert response.status_code == status.HTTP_200_OK
@@ -206,9 +195,7 @@ class TestUserIntegration(APITestCase):
         assert response.status_code == status.HTTP_403_FORBIDDEN
 
     def test_base_user_cant_all_get(self):
-        payload = {
-            "path": self.endpoints["user"]
-        }
+        payload = {"path": self.endpoints["user"]}
         response = self.api_logged_user.get(**payload)
 
         assert response.status_code == status.HTTP_403_FORBIDDEN
@@ -222,17 +209,13 @@ class TestUserIntegration(APITestCase):
         assert response.status_code == status.HTTP_200_OK
 
     def test_super_user_can_retrieve_another_user(self):
-        payload = {
-            "path": self.endpoints["retrieve_user"].format(self.base_user.id)
-        }
+        payload = {"path": self.endpoints["retrieve_user"].format(self.base_user.id)}
         response = self.api_logged_superuser.get(**payload)
 
         assert response.status_code == status.HTTP_200_OK
 
     def test_super_user_can_all_get(self):
-        payload = {
-            "path": self.endpoints["user"]
-        }
+        payload = {"path": self.endpoints["user"]}
         response = self.api_logged_superuser.get(**payload)
 
         assert response.status_code == status.HTTP_200_OK

@@ -8,24 +8,8 @@ from .models import UserModel
 @admin.register(UserModel)
 class UserAdmin(admin.ModelAdmin):
     fieldsets = [
-        [
-            _("Identification"),
-            {
-                "fields": [
-                    "name",
-                    "document"
-                ]
-            }
-        ],
-        [
-            _("Credentials"),
-            {
-                "fields": [
-                    "email",
-                    "password"
-                ]
-            }
-        ],
+        [_("Identification"), {"fields": ["name", "document"]}],
+        [_("Credentials"), {"fields": ["email", "password"]}],
         [
             _("Administration"),
             {

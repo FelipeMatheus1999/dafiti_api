@@ -7,5 +7,5 @@ router.register("product", ProductViewSet)
 
 urlpatterns = [
     path("product/export/csv/", ProductViewSet.as_view({"get": "export_csv_file"})),
-    path("product/import/csv/", ProductViewSet.as_view({"post": "import_csv_file"}))
+    path("product/import/csv/", ProductViewSet.as_view({"post": "import_csv_file"})),
 ] + router.urls

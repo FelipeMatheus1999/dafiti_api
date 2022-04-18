@@ -19,11 +19,13 @@ class ProductSerializer(serializers.ModelSerializer):
             "date_joined",
             "date_modified",
             "is_active",
-            "categories"
+            "categories",
         ]
 
     def create(self, validated_data):
-        categories = validated_data.pop("categories") if "categories" in validated_data else []
+        categories = (
+            validated_data.pop("categories") if "categories" in validated_data else []
+        )
         categories = [
             CategoryModel.objects.get_or_create(**category)[0].id
             for category in categories
@@ -36,7 +38,9 @@ class ProductSerializer(serializers.ModelSerializer):
         return instance
 
     def update(self, instance, validated_data):
-        categories = validated_data.pop("categories") if "categories" in validated_data else None
+        categories = (
+            validated_data.pop("categories") if "categories" in validated_data else None
+        )
 
         instance = super().update(instance, validated_data)
 

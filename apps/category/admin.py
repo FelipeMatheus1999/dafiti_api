@@ -13,18 +13,12 @@ class CategoryAdmin(admin.ModelAdmin):
                 "fields": [
                     "name",
                 ]
-            }
+            },
         ],
         [
             _("Administration"),
-            {
-                "fields": [
-                    "date_joined",
-                    "date_modified",
-                    "is_active"
-                ]
-            }
-        ]
+            {"fields": ["date_joined", "date_modified", "is_active"]},
+        ],
     ]
     readonly_fields = ["date_joined", "date_modified"]
     list_display = ["__str__", "date_joined", "date_modified"]

@@ -12,7 +12,10 @@ class Command(BaseCommand):
         adjective_list = ["Blue", "Yellow", "Black", "Green", "Red"]
         product_list = ["Pants", "Shorts", "Dress", "Shoes", "Shirt"]
         categories = ["Teen", "Classic", "Vintage", "Summer", "Old School"]
-        categories_id = [CategoryModel.objects.get_or_create(name=category)[0] for category in categories]
+        categories_id = [
+            CategoryModel.objects.get_or_create(name=category)[0]
+            for category in categories
+        ]
 
         for _ in range(100):
             fields = {
@@ -23,7 +26,9 @@ class Command(BaseCommand):
             }
             product = ProductModel.objects.create(**fields)
 
-            product_categories = [categories_id[random.randrange(0, len(categories_id))]]
+            product_categories = [
+                categories_id[random.randrange(0, len(categories_id))]
+            ]
             product.categories.set(product_categories)
 
         self.stdout.write(f"100 products was created")

@@ -14,10 +14,7 @@ class TestProductModel(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.product = ProductModel.objects.create(
-            title=fake.name(),
-            description=fake.text(),
-            price=10.0,
-            stock=5
+            title=fake.name(), description=fake.text(), price=10.0, stock=5
         )
 
     @staticmethod

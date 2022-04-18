@@ -90,7 +90,11 @@ class ExportCSVMixin(DBToFile):
                 "is_active": self.get_field_or_none(row._10),
             }
 
-            fields = {k: v for k, v in received_fields.items() if received_fields[k] is not None}
+            fields = {
+                k: v
+                for k, v in received_fields.items()
+                if received_fields[k] is not None
+            }
 
             return fields
         except Exception as e:
@@ -99,8 +103,12 @@ class ExportCSVMixin(DBToFile):
 
     def create_instance(self, fields):
         try:
-            categories = fields["categories"].split(" | ") if "categories" in fields else []
-            categories = [CategoryModel.objects.get(id=int(category)) for category in categories]
+            categories = (
+                fields["categories"].split(" | ") if "categories" in fields else []
+            )
+            categories = [
+                CategoryModel.objects.get(id=int(category)) for category in categories
+            ]
 
             if "categories" in fields:
                 del fields["categories"]
@@ -128,18 +136,23 @@ class ExportCSVMixin(DBToFile):
 
             self.count_lines += 1
 
-        import_status = status.HTTP_200_OK if len(self.errors) == 0 else status.HTTP_400_BAD_REQUEST
+        import_status = (
+            status.HTTP_200_OK if len(self.errors) == 0 else status.HTTP_400_BAD_REQUEST
+        )
 
         return Response(
             {
                 "count_lines": self.count_lines,
                 "count_errors": len(self.errors),
-                "errors": self.errors
-            }, status=import_status
+                "errors": self.errors,
+            },
+            status=import_status,
         )
 
     def export_csv_file(self, _):
         dataset = self.resource().export()
         response = HttpResponse(dataset.csv, content_type="text/csv")
-        response.headers["Content-Disposition"] = f'attachment; filename="{self.model_import.__name__}.csv"'
+        response.headers[
+            "Content-Disposition"
+        ] = f'attachment; filename="{self.model_import.__name__}.csv"'
         return response

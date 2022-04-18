@@ -37,4 +37,3 @@ class ProductViewSet(ModelViewSet, ExportCSVMixin):
         serializer = self.get_serializer(page, many=True)
         cache.set("list_products", json.dumps(serializer.data))
         return self.get_paginated_response(serializer.data)
-

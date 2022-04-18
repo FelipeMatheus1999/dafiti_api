@@ -15,7 +15,10 @@ class TestProductViewSet(TestCase):
         assert issubclass(ProductViewSet, ModelViewSet)
 
     def test_attributes(self):
-        self.assertEquals(str(ProductViewSet.queryset), str(ProductModel.objects.order_by("id").filter(is_active=True)))
+        self.assertEquals(
+            str(ProductViewSet.queryset),
+            str(ProductModel.objects.order_by("id").filter(is_active=True)),
+        )
         self.assertEquals(ProductViewSet.serializer_class, ProductSerializer)
         self.assertEquals(ProductViewSet.authentication_classes, [TokenAuthentication])
         self.assertEquals(ProductViewSet.permission_classes, [ProductPermissions])

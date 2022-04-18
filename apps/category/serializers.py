@@ -21,7 +21,9 @@ class CategorySerializer(serializers.ModelSerializer):
         if name is not None:
             try:
                 CategoryModel.objects.get(name=name)
-                raise serializers.ValidationError({"detail": _("Category with this Category Name already exists.")})
+                raise serializers.ValidationError(
+                    {"detail": _("Category with this Category Name already exists.")}
+                )
             except CategoryModel.DoesNotExist:
                 pass
 
